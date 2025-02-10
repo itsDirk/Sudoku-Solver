@@ -17,10 +17,39 @@ public class Sudoku {
     private void generateSudoku() {
         Random random = new Random();
 
-        for (int i = 0; i < sudokuSize; i++) {
-            for (int j = 0; j < sudokuSize; j++) {
-                sudoku[i][j] = random.nextInt(1, sudokuSize + 1);
+        for (int y = 0; y < sudokuSize; y++) {
+            for (int x = 0; x < sudokuSize; x++) {
+                boolean isValidNumber = false;
+                int number = 0;
+                while (!isValidNumber) {
+                    number = random.nextInt(1, sudokuSize + 1);
+                    isValidNumber = isValidPlacementForNumber(x, y, number);
+                }
+                sudoku[x][y] = number;
+                printPuzzle();
             }
         }
+    }
+    
+    private boolean isValidPlacementForNumber(int x, int y, int number) {
+        return isValidPlacementInColumn(x, number) && isValidPlacementInRow(y, number);
+    }
+
+    private boolean isValidPlacementInColumn(int x, int number) {
+        for (int i = 0; i < sudokuSize; i++) {
+            if (sudoku[x][i] == number) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private boolean isValidPlacementInRow(int y, int number) {
+        for (int i = 0; i < sudokuSize; i++) {
+            if (sudoku[i][y] == number) {
+                return false;
+            }
+        }
+        return true;
     }
 }

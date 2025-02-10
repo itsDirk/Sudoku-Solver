@@ -61,8 +61,6 @@ public class SudokuPrinter {
                     } else {
                         input[i][j] = SudokuTile.Empty.getSymbol().charAt(0);
                     }
-                } else {
-                    input[i][j] = SudokuTile.Empty.getSymbol().charAt(0);
                 }
             }
         }
@@ -71,13 +69,13 @@ public class SudokuPrinter {
     }
 
     private static char[][] setNumbers(char[][] input, int[][] sudoku) {
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 0; j < input.length; j++) {
-                if (i % 2 == 1 && j % 2 == 1) {
-                    int sudokuRow = i / 2;
-                    int sudokuCol = j / 2;
+        for (int y = 0; y < input.length; y++) {
+            for (int x = 0; x < input.length; x++) {
+                if (x % 2 == 1 && y % 2 == 1) {
+                    int sudokuCol = x / 2;
+                    int sudokuRow = y / 2;
 //                    if (sudoku[sudokuRow][sudokuCol] != 0) {
-                        input[i][j] = Character.forDigit(sudoku[sudokuRow][sudokuCol], 10);
+                        input[x][y] = Character.forDigit(sudoku[sudokuRow][sudokuCol], 10);
 //                    }
                 }
             }
