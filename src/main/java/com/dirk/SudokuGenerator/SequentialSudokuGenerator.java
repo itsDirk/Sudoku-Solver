@@ -1,34 +1,40 @@
 package com.dirk.SudokuGenerator;
 
 import com.dirk.SudokuPrinter.ISudokuPrinter;
-import com.dirk.SudokuPrinter.ThinSudokuPrinter;
 import com.dirk.SudokuPrinter.WideSudokuPrinter;
 
 import java.util.Random;
 
-public class RandomSudokuGenerator implements ISudokuGenerator {
+public class SequentialSudokuGenerator implements ISudokuGenerator {
     private int sudokuSize;
 
-    public RandomSudokuGenerator(int sudokuSize) {
+    public SequentialSudokuGenerator(int sudokuSize) {
         this.sudokuSize = sudokuSize;
     }
 
     @Override
     public int[][] generateSudoku() {
         Random random = new Random();
+        int subSquareSize = (int) Math.sqrt(sudokuSize);
         int[][] sudoku = new int[sudokuSize][sudokuSize];
         ISudokuPrinter sudokuPrinter = new WideSudokuPrinter();
 
-        for (int y = 0; y < sudokuSize; y++) {
-            for (int x = 0; x < sudokuSize; x++) {
-                boolean isValidNumber = false;
-                int number = 0;
-                while (!isValidNumber) {
-                    number = random.nextInt(1, sudokuSize + 1);
-                    isValidNumber = isValidPlacementForNumber(sudoku, x, y, number);
+        for (int i = 1; i <= sudokuSize; i++) {
+            for (int y = 0; y < subSquareSize; y++) {
+                for (int x = 0; x < subSquareSize; x++) {
+                    boolean isValidPlacement = false;
+                    int newX = 0;
+                    int newY = 0;
+                    while (!isValidPlacement) {
+                        int randomColumn = random.nextInt(subSquareSize);
+                        int randomRow = random.nextInt(subSquareSize);
+                        newX = x * subSquareSize + randomColumn;
+                        newY = y * subSquareSize + randomRow;
+                        isValidPlacement = isValidPlacementForNumber(sudoku, newX, newY, i);
+                    }
+                    sudoku[newX][newY] = i;
+                    sudokuPrinter.printSudoku(sudoku);
                 }
-                sudoku[x][y] = number;
-                sudokuPrinter.printSudoku(sudoku);
             }
         }
 
