@@ -1,7 +1,10 @@
-package com.dirk;
+package com.dirk.SudokuPrinter;
 
-public class SudokuPrinter {
-    public static void printSudoku(int[][] sudoku) {
+import com.dirk.SudokuTile;
+
+public class ThinSudokuPrinter implements ISudokuPrinter{
+    @Override
+    public void printSudoku(int[][] sudoku) {
         int sudokuSize = sudoku.length;
         int totalLines = sudokuSize * 2 + 1;
         char[][] output = new char[totalLines][totalLines];
@@ -74,9 +77,9 @@ public class SudokuPrinter {
                 if (x % 2 == 1 && y % 2 == 1) {
                     int sudokuCol = x / 2;
                     int sudokuRow = y / 2;
-//                    if (sudoku[sudokuRow][sudokuCol] != 0) {
+                    if (sudoku[sudokuRow][sudokuCol] != 0) {
                         input[x][y] = Character.forDigit(sudoku[sudokuRow][sudokuCol], 10);
-//                    }
+                    }
                 }
             }
         }
@@ -88,7 +91,7 @@ public class SudokuPrinter {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < input.length; i++) {
             for (int j = 0; j < input.length; j++) {
-                sb.append(input[i][j]);
+                sb.append(input[i][j] + " ");
             }
             sb.append("\n");
         }
