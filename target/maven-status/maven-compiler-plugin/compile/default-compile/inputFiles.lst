@@ -2,7 +2,8 @@ C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\App.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\Sudoku.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuGenerator\ISudokuGenerator.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuGenerator\RandomSudokuGenerator.java
-C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuGenerator\SmartSudokuGenerator.java
+C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuGenerator\SequentialSudokuGenerator.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuPrinter\ISudokuPrinter.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuPrinter\ThinSudokuPrinter.java
+C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuPrinter\WideSudokuPrinter.java
 C:\Users\Dirk\Documents\GitHub\Sudoku\src\main\java\com\dirk\SudokuTile.java

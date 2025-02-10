@@ -1,8 +1,9 @@
-com\dirk\SudokuGenerator\SmartSudokuGenerator.class
+com\dirk\SudokuGenerator\SequentialSudokuGenerator.class
 com\dirk\SudokuGenerator\RandomSudokuGenerator.class
 com\dirk\SudokuGenerator\ISudokuGenerator.class
 com\dirk\SudokuPrinter\ISudokuPrinter.class
 com\dirk\App.class
 com\dirk\Sudoku.class
+com\dirk\SudokuPrinter\WideSudokuPrinter.class
 com\dirk\SudokuPrinter\ThinSudokuPrinter.class
 com\dirk\SudokuTile.class
