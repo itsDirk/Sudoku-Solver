@@ -1,10 +1,8 @@
 package com.dirk;
 
 import com.dirk.SudokuGenerator.ISudokuGenerator;
-import com.dirk.SudokuGenerator.RandomSudokuGenerator;
-import com.dirk.SudokuGenerator.SequentialSudokuGenerator;
+import com.dirk.SudokuGenerator.RecursiveSudokuGenerator;
 import com.dirk.SudokuPrinter.ISudokuPrinter;
-import com.dirk.SudokuPrinter.ThinSudokuPrinter;
 import com.dirk.SudokuPrinter.WideSudokuPrinter;
 
 public class Sudoku {
@@ -12,13 +10,16 @@ public class Sudoku {
     private int[][] sudoku;
 
     public Sudoku() {
-        ISudokuGenerator sudokuGenerator = new SequentialSudokuGenerator(sudokuSize);
+        ISudokuGenerator sudokuGenerator = new RecursiveSudokuGenerator(sudokuSize);
         sudoku = sudokuGenerator.generateSudoku();
     }
 
     public void printPuzzle() {
-        ISudokuPrinter sudokuPrinter = new WideSudokuPrinter();
-        sudokuPrinter.printSudoku(sudoku);
+        if (sudoku == null) {
+            System.out.println("Sudoku is null!");
+            return;
+        }
+        new WideSudokuPrinter().printSudoku(sudoku);
     }
 
 
