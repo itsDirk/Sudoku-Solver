@@ -25,7 +25,7 @@ public class RandomSudokuGenerator implements ISudokuGenerator {
                 int number = 0;
                 while (!isValidNumber) {
                     number = random.nextInt(1, sudokuSize + 1);
-                    isValidNumber = isValidPlacementForNumber(sudoku, x, y, number);
+                    isValidNumber = SudokuChecker.isValidPlacementForNumber(sudoku, x, y, number);
                 }
                 sudoku[x][y] = number;
                 sudokuPrinter.printSudoku(sudoku);
@@ -33,49 +33,5 @@ public class RandomSudokuGenerator implements ISudokuGenerator {
         }
 
         return sudoku;
-    }
-
-    private boolean isValidPlacementForNumber(int[][] sudoku, int x, int y, int number) {
-        return isUnoccupied(sudoku, x, y) &&
-                isValidPlacementInColumn(sudoku, x, number) &&
-                isValidPlacementInRow(sudoku, y, number) &&
-                isValidPlacementInSquare(sudoku, x, y, number);
-    }
-
-    private boolean isUnoccupied(int[][] sudoku, int x, int y) {
-        return sudoku[x][y] == 0;
-    }
-
-    private boolean isValidPlacementInColumn(int[][] sudoku, int x, int number) {
-        for (int i = 0; i < sudokuSize; i++) {
-            if (sudoku[x][i] == number) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isValidPlacementInRow(int[][] sudoku, int y, int number) {
-        for (int x = 0; x < sudokuSize; x++) {
-            if (sudoku[x][y] == number) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isValidPlacementInSquare(int[][] sudoku, int x, int y, int number) {
-        int squareSize = (int) Math.sqrt(sudokuSize);
-        int squareX = x / squareSize;
-        int squareY = y / squareSize;
-
-        for (int i = squareX * squareSize; i < squareX * squareSize + squareSize; i++) {
-            for (int j = squareY * squareSize; j < squareY * squareSize + squareSize; j++) {
-                if (sudoku[i][j] == number) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }
