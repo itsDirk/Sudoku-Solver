@@ -2,7 +2,6 @@ package com.dirk;
 
 import com.dirk.SudokuGenerator.ISudokuGenerator;
 import com.dirk.SudokuGenerator.RecursiveSudokuGenerator;
-import com.dirk.SudokuPrinter.ISudokuPrinter;
 import com.dirk.SudokuPrinter.WideSudokuPrinter;
 
 public class Sudoku {

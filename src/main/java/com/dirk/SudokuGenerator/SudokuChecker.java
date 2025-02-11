@@ -65,8 +65,8 @@ public class SudokuChecker {
         int[] cell = new int[]{-1, -1};
         int minPossibleNumbers = sudokuSize + 1;
 
-        for (int x = 0; x < sudokuSize; x++) {
-            for (int y = 0; y < sudoku[x].length; y++) {
+        for (int y = 0; y < sudokuSize; y++) {
+            for (int x = 0; x < sudoku[y].length; x++) {
                 if (sudoku[x][y] == 0) {
                     int amountOfPossibleNumbers = getPossibleNumbers(sudoku, x, y).length;
                     if (amountOfPossibleNumbers < minPossibleNumbers && amountOfPossibleNumbers > 0) {

@@ -1,5 +1,7 @@
 package com.dirk.SudokuGenerator;
 
+import com.dirk.SudokuPrinter.WideSudokuPrinter;
+
 import java.util.Random;
 
 public class RecursiveSudokuGenerator implements ISudokuGenerator {
@@ -33,7 +35,8 @@ public class RecursiveSudokuGenerator implements ISudokuGenerator {
         
         int[] possibleNumbers = SudokuChecker.getPossibleNumbers(sudoku, x, y);
         Random random = new Random();
-        sudoku[x][y] = SudokuChecker.getPossibleNumbers(sudoku, x, y)[random.nextInt(possibleNumbers.length)];
+        sudoku[x][y] = possibleNumbers[random.nextInt(possibleNumbers.length)];
+        new WideSudokuPrinter().printSudoku(sudoku);
         return recursiveSudoku(sudoku);
     }
 }
