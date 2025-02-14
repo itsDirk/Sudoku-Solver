@@ -79,7 +79,7 @@ public class WideSudokuPrinter implements ISudokuPrinter {
                     int column = x / 4;
                     int row = y / 2;
                     if (sudoku[column][row] != 0) {
-                        input[y][x] = Character.forDigit(sudoku[column][row], 10);
+                        input[y][x] = Integer.toHexString(sudoku[column][row]).charAt(0);
                     }
                 }
             }
