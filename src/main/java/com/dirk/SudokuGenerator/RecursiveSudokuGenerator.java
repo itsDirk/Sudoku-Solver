@@ -1,14 +1,20 @@
 package com.dirk.SudokuGenerator;
 
+import com.dirk.SudokuPrinter.SudokuCell;
 import com.dirk.SudokuPrinter.WideSudokuPrinter;
 
 import java.util.Random;
 
 public class RecursiveSudokuGenerator implements ISudokuGenerator {
-    private int sudokuSize;
+    private final int sudokuSize;
+    private final Random random;
 
     public RecursiveSudokuGenerator(int sudokuSize) {
+        if (sudokuSize < 1 || sudokuSize > 15 || sudokuSize % Math.sqrt(sudokuSize) != 0) {
+            throw new IllegalArgumentException("Sudoku size must be a positive (max 15) and have a perfect square.");
+        }
         this.sudokuSize = sudokuSize;
+        this.random = new Random();
     }
 
     @Override
@@ -24,17 +30,17 @@ public class RecursiveSudokuGenerator implements ISudokuGenerator {
     }
 
     private int[][] recursiveSudoku(int[][] sudoku) {
-        int[] cellWithLeastPossibleNumbers = SudokuChecker.getCellWithLeastPossibleNumbers(sudoku);
+        SudokuCell cellWithLeastPossibleNumbers = SudokuChecker.getCellWithLeastPossibleNumbers(sudoku);
 
-        if (cellWithLeastPossibleNumbers[0] == -1) {
+        if (cellWithLeastPossibleNumbers.x == -1) {
             return sudoku;
         }
 
-        int x = cellWithLeastPossibleNumbers[0];
-        int y = cellWithLeastPossibleNumbers[1];
-        
+        int x = cellWithLeastPossibleNumbers.x;
+        int y = cellWithLeastPossibleNumbers.y;
+
         int[] possibleNumbers = SudokuChecker.getPossibleNumbers(sudoku, x, y);
-        Random random = new Random();
+
         sudoku[x][y] = possibleNumbers[random.nextInt(possibleNumbers.length)];
         new WideSudokuPrinter().printSudoku(sudoku);
         return recursiveSudoku(sudoku);

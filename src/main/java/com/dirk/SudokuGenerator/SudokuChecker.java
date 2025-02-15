@@ -1,5 +1,7 @@
 package com.dirk.SudokuGenerator;
 
+import com.dirk.SudokuPrinter.SudokuCell;
+
 import java.util.ArrayList;
 
 public class SudokuChecker {
@@ -60,9 +62,9 @@ public class SudokuChecker {
         return possibleNumbers.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static int[] getCellWithLeastPossibleNumbers(int[][] sudoku) {
+    public static SudokuCell getCellWithLeastPossibleNumbers(int[][] sudoku) {
         int sudokuSize = sudoku.length;
-        int[] cell = new int[]{-1, -1};
+        SudokuCell sudokuCell = new SudokuCell(-1, -1);
         int minPossibleNumbers = sudokuSize + 1;
 
         for (int y = 0; y < sudokuSize; y++) {
@@ -71,13 +73,13 @@ public class SudokuChecker {
                     int amountOfPossibleNumbers = getPossibleNumbers(sudoku, x, y).length;
                     if (amountOfPossibleNumbers < minPossibleNumbers && amountOfPossibleNumbers > 0) {
                         minPossibleNumbers = amountOfPossibleNumbers;
-                        cell[0] = x;
-                        cell[1] = y;
+                        sudokuCell.x = x;
+                        sudokuCell.y = y;
                     }
                 }
             }
         }
 
-        return cell;
+        return sudokuCell;
     }
 }
