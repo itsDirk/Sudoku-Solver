@@ -1,5 +1,4 @@
 package com.dirk.SudokuPrinter;
-
 import com.dirk.SudokuTile;
 
 public class WideSudokuPrinter implements ISudokuPrinter {
@@ -17,6 +16,8 @@ public class WideSudokuPrinter implements ISudokuPrinter {
     }
 
     private static char[][] setOutlines(char[][] input) {
+        int squareSize = (int) Math.sqrt((double) (Math.min(input.length, input[0].length) - 1) / 2);
+
         for (int y = 0; y < input.length; y++) {
             for (int x = 0; x < input[0].length; x++) {
                 if (y == 0) {
@@ -24,7 +25,7 @@ public class WideSudokuPrinter implements ISudokuPrinter {
                         input[y][x] = SudokuTile.ThickCornerTopLeft.getSymbol().charAt(0);
                     } else if (x == input[0].length - 1) {
                         input[y][x] = SudokuTile.ThickCornerTopRight.getSymbol().charAt(0);
-                    } else if (x % 12 == 0) {
+                    } else if (x % (squareSize * 4) == 0) {
                         input[y][x] = SudokuTile.ThickTTop.getSymbol().charAt(0);
                     } else {
                         input[y][x] = SudokuTile.ThickHorizontalLine.getSymbol().charAt(0);
@@ -34,23 +35,23 @@ public class WideSudokuPrinter implements ISudokuPrinter {
                         input[y][x] = SudokuTile.ThickCornerBottomLeft.getSymbol().charAt(0);
                     } else if (x == input[0].length - 1) {
                         input[y][x] = SudokuTile.ThickCornerBottomRight.getSymbol().charAt(0);
-                    } else if (x % 12 == 0) {
+                    } else if (x % (squareSize * 4) == 0) {
                         input[y][x] = SudokuTile.ThickTBottom.getSymbol().charAt(0);
                     } else {
                         input[y][x] = SudokuTile.ThickHorizontalLine.getSymbol().charAt(0);
                     }
-                } else if (y % 6 == 0) {
+                } else if (y % (squareSize * 2) == 0) {
                     if (x == 0) {
                         input[y][x] = SudokuTile.ThickTLeft.getSymbol().charAt(0);
                     } else if (x == input[0].length - 1) {
                         input[y][x] = SudokuTile.ThickTRight.getSymbol().charAt(0);
-                    } else if (x % 12 == 0) {
+                    } else if (x % (squareSize * 4) == 0) {
                         input[y][x] = SudokuTile.ThickCross.getSymbol().charAt(0);
                     } else {
                         input[y][x] = SudokuTile.ThickHorizontalLine.getSymbol().charAt(0);
                     }
                 } else if (y % 2 == 0) {
-                    if (x % 12 == 0) {
+                    if (x % (squareSize * 4) == 0) {
                         input[y][x] = SudokuTile.ThickVerticalLine.getSymbol().charAt(0);
                     } else if (x % 4 == 0) {
                         input[y][x] = SudokuTile.ThinCross.getSymbol().charAt(0);
@@ -58,7 +59,7 @@ public class WideSudokuPrinter implements ISudokuPrinter {
                         input[y][x] = SudokuTile.ThinHorizontalLine.getSymbol().charAt(0);
                     }
                 } else if (y % 2 == 1) {
-                    if (x % 12 == 0) {
+                    if (x % (squareSize * 4) == 0) {
                         input[y][x] = SudokuTile.ThickVerticalLine.getSymbol().charAt(0);
                     } else if (x % 4 == 0) {
                         input[y][x] = SudokuTile.ThinVerticalLine.getSymbol().charAt(0);
@@ -79,7 +80,7 @@ public class WideSudokuPrinter implements ISudokuPrinter {
                     int column = x / 4;
                     int row = y / 2;
                     if (sudoku[column][row] != 0) {
-                        input[y][x] = Integer.toHexString(sudoku[column][row]).charAt(0);
+                        input[y][x] = Integer.toHexString(sudoku[column][row] % 16).charAt(0);
                     }
                 }
             }

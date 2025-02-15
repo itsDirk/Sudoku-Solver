@@ -10,8 +10,8 @@ public class RecursiveSudokuGenerator implements ISudokuGenerator {
     private final Random random;
 
     public RecursiveSudokuGenerator(int sudokuSize) {
-        if (sudokuSize < 1 || sudokuSize > 15 || sudokuSize % Math.sqrt(sudokuSize) != 0) {
-            throw new IllegalArgumentException("Sudoku size must be a positive (max 15) and have a perfect square.");
+        if (sudokuSize < 1 || sudokuSize > 16 || sudokuSize % Math.sqrt(sudokuSize) != 0) {
+            throw new IllegalArgumentException("Sudoku size must be a positive integer (max 16) and a squared number.");
         }
         this.sudokuSize = sudokuSize;
         this.random = new Random();
@@ -19,14 +19,23 @@ public class RecursiveSudokuGenerator implements ISudokuGenerator {
 
     @Override
     public int[][] generateSudoku() {
+        int[][] sudoku = null;
+
+        while (!SudokuChecker.isValidSudoku(sudoku)) {
+            sudoku = recursiveSudoku(getEmptySudoku());
+        }
+
+        return sudoku;
+    }
+
+    private int[][] getEmptySudoku() {
         int[][] sudoku = new int[sudokuSize][sudokuSize];
         for (int i = 0; i < sudokuSize; i++) {
             for (int j = 0; j < sudokuSize; j++) {
                 sudoku[i][j] = 0;
             }
         }
-
-        return recursiveSudoku(sudoku);
+        return sudoku;
     }
 
     private int[][] recursiveSudoku(int[][] sudoku) {
@@ -42,7 +51,6 @@ public class RecursiveSudokuGenerator implements ISudokuGenerator {
         int[] possibleNumbers = SudokuChecker.getPossibleNumbers(sudoku, x, y);
 
         sudoku[x][y] = possibleNumbers[random.nextInt(possibleNumbers.length)];
-        new WideSudokuPrinter().printSudoku(sudoku);
         return recursiveSudoku(sudoku);
     }
 }

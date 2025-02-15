@@ -82,4 +82,19 @@ public class SudokuChecker {
 
         return sudokuCell;
     }
+    
+    public static boolean isValidSudoku(int[][] sudoku) {
+        if (sudoku == null) {
+            return false;
+        }
+        
+        for (int[] ints : sudoku) {
+            for (int anInt : ints) {
+                if (anInt == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
